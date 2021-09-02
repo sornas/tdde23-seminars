@@ -1,0 +1,257 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{minted}  % code with syntax highlighting
+
+\title{Seminarium 01}
+\subtitle{Satser och uttryck}
+\date{7 september 2021}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \section*{Introduktion}
+
+  \begin{frame}
+    \frametitle{Lite om mig}
+
+    Gustav Sörnäs \\
+    \texttt{gusso230@student.liu.se}
+
+    Ett år på Y, numera D3.
+
+    Handledare för halva U1.b.
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Lite om er}
+
+    D1 och U1 (och kanske några äldre).
+
+    Inga förväntade förkunskaper innan universitetet.
+
+    Redo att testa er fram själva / i små grupper med egen dator.
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Lite om seminarieformen}
+
+    Mer fokus på eget kodskrivande än ''Ett steg i taget'', men mer konkret än
+    ''Diskussion och analys''.
+
+    Fritt fram att byta spår under terminen.
+
+    Innan seminariet: läs förberedelsematerialet och försök er på uppgifterna.
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Dagens seminarium}
+
+    \begin{itemize}
+      \item Satser och uttryck.
+      \item Analysera \texttt{fibonacci}.
+      \item Implementera en matematiskt definerad funktion.
+      \item Uppgift: skriv en egen funktion.
+      \item Variablers synlighet.
+    \end{itemize}
+
+    Inte så mycket kodskrivning. Diskussioner först i mindre grupper och sedan i
+    helklass.
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Satser och uttryck}
+
+    Sats (\textit{statement}): En typ av \emph{instruktion} som kan utföras av
+    Python. Enkla satser (tilldelning) och sammansatta satser (\texttt{for},
+    \texttt{def}, \texttt{if}).
+
+    Uttryck (\textit{expression}): Något som Python kan utvärdera till ett
+    värde. Enkla uttryck (identifierare och \textit{literaler} (eller
+    \textit{konstanter})) och sammansatta uttryck (additioner, subtraktioner,
+    \dots).
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{\texttt{fibonacci}}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[linenos]{python}
+def fibonacci(n):
+    if n < 3:
+        return n - 1
+    a = 0
+    b = 1
+
+    for i in range(n - 2):
+        c = b
+        b = a + b
+        a = c
+    return b
+        \end{minted}
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        \begin{enumerate}
+          \item Hur många satser finns i koden?
+          \item Hur många sammansatta uttryck finns i koden?
+        \end{enumerate}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{\texttt{fibonacci}}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[linenos]{python}
+def fibonacci(n):
+    if n < 3:
+        return n - 1
+    a = 0
+    b = 1
+
+    for i in range(n - 2):
+        c = b
+        b = a + b
+        a = c
+    return b
+        \end{minted}
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        \begin{enumerate}
+          \item Vad gör funktionen?
+          \item Vad returnerar funktionen?
+          \item Vilken indata hanterar funktionen?
+          \item Vad används variabeln \texttt{c} till? Vad skulle den kunna heta istället?
+          \item Är returvärdet ett heltal eller flyttal?
+          \item Vad kommer hända om ni matar in ett flyttal?
+        \end{enumerate}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{\texttt{gcd}}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}{text}
++---
+| gcd(a, 0) = a
+| gcd(a, b) = gcd(b, a mod b)
++---
+        \end{minted}
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        \begin{enumerate}
+          \item Beskriv hur beräkningen går till.
+          \item Implementera \texttt{gcd} i Python.
+          \item Räkna antalet satser och sammansatta uttryck i er Python-kod.
+        \end{enumerate}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{\texttt{gcd}}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[linenos]{python}
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+        \end{minted}
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        \begin{enumerate}
+          \item Beskriv hur beräkningen går till.
+          \item Implementera \texttt{gcd} i Python.
+          \item Räkna antalet satser och sammansatta uttryck i er Python-kod.
+        \end{enumerate}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Uppgift: \texttt{latest\_birthday\_before}}
+
+    I grupper om minst fem personer, skriv en funktion som tar in två heltal
+    (månad och dag) och returnerar namnet på den i gruppen vars födelsedag är
+    närmast i tiden, räknat \emph{bakåt} från det inskickade datumet.
+
+    \pause
+
+    \begin{columns}[T]
+      \begin{column}{0.2\textwidth}
+        \begin{enumerate}
+          \item 20/8
+          \item 15/8
+          \item 18/7
+        \end{enumerate}
+      \end{column}%
+      \begin{column}{0.78\textwidth}
+        \texttt{latest\_birthday\_before(18, 8) == (15, 8)}\\
+        \texttt{latest\_birthday\_before(15, 8) == (15, 8)}\\
+        \texttt{latest\_birthday\_before(14, 8) == (18, 7)}\\
+        \texttt{latest\_birthday\_before(10, 7) == ?}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Uppgift: }
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[fontsize=\scriptsize,linenos]{python}
+g = 0
+def outer(in1):
+    a = "a"
+    def inner(in2):
+        print(a) # 1
+        c = "c"
+        a = "a from inner"
+        print(in2) # 2
+    print(c) # 3
+    print(a) # 4
+    inner("into inner")
+    print(c) # 5
+    print(a) # 6
+    if g == 0:
+        d = "g = 0"
+    else:
+        e = "g != 0"
+    print(d) # 7
+    print(e) # 8
+        \end{minted}
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        \begin{enumerate}
+          \item Vilka print-satser kommer fungera? Vilka kommer att krascha?
+          \item Vad skriver de som fungerar ut?
+        \end{enumerate}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+\end{document}
