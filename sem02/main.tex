@@ -6,7 +6,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[swedish]{babel}
 
-\usepackage{minted}  % code with syntax highlighting
+\usepackage{minted} % code with syntax highlighting
+\usepackage[normalem]{ulem} % strikethrought
 \usepackage{url}
 
 \title{Seminarium 02}
@@ -39,39 +40,208 @@
 
     Innan seminariet: läs förberedelsematerialet och försök er på uppgifterna.
 
+    Skicka in lösningar så vi kan diskutera i helklass:
+    \texttt{seminarium.sörnäs.se}. Anonymt, sålänge du inte skriver ditt namn i
+    koden :)
+
   \end{frame}
 
   \begin{frame}
     \frametitle{Dagens seminarium}
 
     \begin{itemize}
-      \item Iteration.
-      \item Uppgift: tupler och rekursion.
-      \item Uppgift: palindrom.
-      \item Uppgift: dictionaries.
-      \item Diskussion.
+      \item Uppgift: iteration
+      \item \sout{Fysisk iteration}
+      \item Analys: tupler och rekursion
+      \item Uppgift: palindrom
+      \item Analys: dictionaries
+      \item Diskussion
     \end{itemize}
 
   \end{frame}
 
-  \begin{frame}
-    \frametitle{Iteration}
+  \begin{frame}[fragile]
+    \frametitle{Uppgift: \texttt{find\_uncut}}
+
+    Om \texttt{True} är en klippt ruta och \texttt{False} är en oklippt ruta,
+    returnera en lista över alla oklippta rutors koordinater.
+
+    \begin{minted}{python}
+>>> find_uncut([
+...     [True,  False, True,  False],
+...     [False, False, True,  True],
+...     [True,  False, False, True],
+...     [False, True,  True,  True]
+... ])
+...
+[(1, 0), (3, 0), (0, 1), (1, 1), (2, 1), (2, 2), (0, 3)]
+    \end{minted}
+
+    \texttt{seminarium.sörnäs.se}
 
   \end{frame}
 
   \begin{frame}[fragile]
-    \frametitle{\texttt{fibonacci}}
+    \frametitle{\texttt{min\_max}}
 
     \begin{columns}
       \begin{column}{0.48\textwidth}
-        \begin{minted}[linenos]{python}
-def f(x): return 2
+        \begin{minted}[fontsize=\scriptsize,linenos]{python}
+def min_max(seq):
+    if not seq:
+        return (None, None)
+    if len(seq) == 1:
+        return (seq[0], seq[0])
+
+    (l_min, l_max) = min_max(seq[1:])
+
+    if seq[0] < l_min:
+        l_min = seq[0]
+    if seq[0] > l_max:
+        l_max = seq[0]
+
+    print("min: ", l_min)
+    print("max: ", l_max)
+
+    return (l_min, l_max)
         \end{minted}
+
+        % Basfall 1: tom lista => (None, None)
+        % Basfall 2: [elem] => (elem, elem)
+        % (l_min, l_max) på tail
+        % Jämför med head.
+        %  Om head < l_min, l_min = head.
+        %  Om head > l_max, l_max = head.
+        % => (l_min, l_max)
+        %
+        % Tänk på steget innan basfallet, alltså när det finns två element i
+        % listan. Ta [1,2,3] som exempel. Rekursivt anrop från näst sista steget
+        % (när vi har [2,3]) ger l_min = l_max = 3. Vi jämför med head och får
+        % 2 < 3 men not 2 > 3, så nya värden är l_min=2 och l_max=3.
+        % Rekursionen bakåt ger sedan l_min=1 och l_max=3.
+
       \end{column}%
       \begin{column}{0.48\textwidth}
-        Frågor
-      \end{column}%
+        \begin{enumerate}
+          \item Funktionen körs med \\ \texttt{[1, 2, 3]} som indata. Vad skrivs ut? Vad returneras?
+          \item Fungerar \texttt{[1, 2, 'abc']} som indata?
+          \item Fungerar \texttt{(1, 2, 3)} som indata?
+        \end{enumerate}
+      \end{column}
     \end{columns}
+
   \end{frame}
 
+  \begin{frame}
+    \frametitle{Hur en rekursiv funktion kan analyseras}
+
+    (Ingen specifik ordning)
+
+    \begin{itemize}
+      \item Vad är basfallen?
+      \item Hur delas problemet upp i samma problem i mindre delar?
+      \item Hur sätts de mindre delarna ihop till grundproblemet?
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Exempel på analys av rekursiv funktion: \texttt{min\_max}}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[fontsize=\scriptsize,linenos]{python}
+def min_max(seq):
+    if not seq:
+        return (None, None)
+    if len(seq) == 1:
+        return (seq[0], seq[0])
+
+    (l_min, l_max) = min_max(seq[1:])
+
+    if seq[0] < l_min:
+        l_min = seq[0]
+    if seq[0] > l_max:
+        l_max = seq[0]
+
+    print("min: ", l_min)
+    print("max: ", l_max)
+
+    return (l_min, l_max)
+        \end{minted}
+
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        \only<1> {Vad är basfallen?}%
+        \only<2> {Hur delas problemet upp i samma problem i mindre delar?}%
+        \only<3> {Hur sätts de mindre delarna ihop till grundproblemet?}%
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Uppgift: palindrom}
+
+    Skriv två funktioner (en iterativ och en rekursiv) som tar en sträng och
+    returnerar huruvida strängen är ett palindrom eller inte.
+
+    Ett palindrom är ett ord som skrivs likadant framlänges som baklänges.
+    Exempel: ABBA, kajak.
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Hur en rekursiv funktion kan designas}
+
+    \begin{itemize}
+      \item Vad är basfallen?
+      \item Hur kan problemet delas upp i samma problem i mindre delar?
+      \item Hur sätts de mindre delarna ihop till grundproblemet?
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Exempel på en rekursiv funktion: \texttt{palin\_rec}}
+
+    \begin{minted}{python}
+def palin_rec(s):
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+    if len(s) <= 1:
+        return True
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+    return s[0] == s[-1] \
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+            and palin_rec(s[1:-1])
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{\texttt{dict\_func}}
+
+    Vad gör den här funktionen?
+
+    \begin{minted}[linenos]{python}
+def dict_func(d):
+    result = {}
+
+    for key in d:
+        if d[key] in result:
+            result[d[key]].append(key)
+        else:
+            result[d[key]] = [key]
+    return result
+    \end{minted}
+
+  \end{frame}
 \end{document}
