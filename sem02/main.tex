@@ -1,0 +1,77 @@
+\documentclass{beamer}
+
+\usecolortheme{seagull}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{minted}  % code with syntax highlighting
+\usepackage{url}
+
+\title{Seminarium 02}
+\subtitle{Experimentering}
+\date{14 september 2021}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \section*{Introduktion}
+
+  \begin{frame}
+    \frametitle{Seminarieformen}
+
+    Mer fokus på eget kodskrivande än ''Ett steg i taget'', men mer konkret än
+    ''Diskussion och analys''.
+
+    Fritt fram att byta spår under terminen.
+
+    Innan seminariet: läs förberedelsematerialet och försök er på uppgifterna.
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Dagens seminarium}
+
+    \begin{itemize}
+      \item Iteration.
+      \item Uppgift: tupler och rekursion.
+      \item Uppgift: palindrom.
+      \item Uppgift: dictionaries.
+      \item Diskussion.
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Iteration}
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{\texttt{fibonacci}}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[linenos]{python}
+def f(x): return 2
+        \end{minted}
+      \end{column}%
+      \begin{column}{0.48\textwidth}
+        Frågor
+      \end{column}%
+    \end{columns}
+  \end{frame}
+
+\end{document}
