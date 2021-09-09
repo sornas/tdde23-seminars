@@ -10,7 +10,7 @@
 \usepackage{url}
 
 \title{Seminarium 01}
-\subtitle{Satser och uttryck}
+\subtitle{Experimentering}
 \date{7 september 2021}
 
 \setlength{\parskip}{1em}
@@ -73,8 +73,8 @@
 
     \begin{enumerate}
 
-      \item \texttt{seminarium.sörnäs.se}: Egenutvecklad! Inte testat än. Klistra
-      in er kod, skriv ert namn och tryck på ''Submit''.
+      \item Egenutvecklad grej jag gjorde. Inte testat än. Klistra in er kod,
+      skriv ert namn och tryck på ''Submit''.
 
       \item Google Drive (backup): Om min grej inte fungerar (högst troligt) får
       ni klistra in kod i ett gemensamt Google Drive-dokument. Vi löser
@@ -104,13 +104,18 @@
     \frametitle{Satser och uttryck}
 
     Sats (\textit{statement}): En typ av \emph{instruktion} som kan utföras av
-    Python. Enkla satser (tilldelning) och sammansatta satser (\texttt{for},
-    \texttt{def}, \texttt{if}).
+    Python. Enkla satser (return, tilldelning, \dots) och sammansatta satser (\texttt{for},
+    \texttt{def}, \texttt{if}, \dots).
 
     Uttryck (\textit{expression}): Något som Python kan utvärdera till ett
     värde. Enkla uttryck (identifierare och \textit{literaler} (eller
     \textit{konstanter})) och sammansatta uttryck (additioner, subtraktioner,
     \dots).
+
+    %% Diskussion och analys %%
+    % Specialfall: uttryckssats. Ett uttryck är också en giltig sats \emph{om
+    % den står som en ensam sats}. Används i princip bara när en funktion som
+    % gör något anropas (t.ex. \texttt{print("Hej!")}.
 
   \end{frame}
 
@@ -137,6 +142,8 @@ def fibonacci(n):
         \begin{enumerate}
           \item Hur många satser finns i koden? Var finns dom?
           \item Hur många sammansatta uttryck finns i koden?
+          %% Diskussion och analys %%
+          % \item Hur många uttryckssatser finns i koden?
         \end{enumerate}
       \end{column}%
     \end{columns}
@@ -168,7 +175,7 @@ def fibonacci(n):
           \item Vilken indata hanterar funktionen?
           \item Vad används variabeln \texttt{c} till? Vad skulle den kunna heta istället?
           \item Är returvärdet ett heltal eller flyttal?
-          \item Vad kommer hända om ni matar in ett flyttal?
+          \item Vad kommer hända om ni matar in (olika) flyttal?
         \end{enumerate}
       \end{column}%
     \end{columns}
@@ -179,10 +186,8 @@ def fibonacci(n):
     \begin{columns}
       \begin{column}{0.48\textwidth}
         \begin{minted}{text}
-+---
-| gcd(a, 0) = a
-| gcd(a, b) = gcd(b, a mod b)
-+---
+gcd(a, 0) = a
+gcd(a, b) = gcd(b, a mod b)
         \end{minted}
       \end{column}%
       \begin{column}{0.48\textwidth}
@@ -203,6 +208,7 @@ def fibonacci(n):
 
     \begin{columns}
       \begin{column}{0.48\textwidth}
+        Förslag:
         \begin{minted}[linenos]{python}
 def gcd(a, b):
     if b == 0:
