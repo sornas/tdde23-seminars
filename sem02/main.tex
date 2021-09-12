@@ -6,6 +6,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[swedish]{babel}
 
+\usepackage{roboto}
+\usepackage[scaled=0.9]{roboto-mono}
+\usepackage[T1]{fontenc}
+
+\usepackage{icomma}
 \usepackage{minted} % code with syntax highlighting
 \usepackage[normalem]{ulem} % strikethrought
 \usepackage{url}
@@ -13,6 +18,7 @@
 \title{Seminarium 02}
 \subtitle{Experimentering}
 \date{14 september 2021}
+\author{Gustav Sörnäs}
 
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{1.2}
@@ -27,8 +33,6 @@
 
 \begin{document}
   \frame{\titlepage}
-
-  \section*{Introduktion}
 
   \begin{frame}
     \frametitle{Seminarieformen}
@@ -50,6 +54,7 @@
     \frametitle{Dagens seminarium}
 
     \begin{itemize}
+      \item Datatyper
       \item Uppgift: iteration
       \item \sout{Fysisk iteration}
       \item Analys: tupler och rekursion
@@ -61,10 +66,88 @@
   \end{frame}
 
   \begin{frame}[fragile]
+    \frametitle{Datatyper -- Enkla datatyper}
+
+    \pause{}
+
+    \begin{itemize}
+      \item Strängar (\texttt{str})
+      \pause{}
+
+      \item Tal (\texttt{int}/\texttt{float})
+      \pause{}
+
+        Tänk på att flyttal har en maxgräns (\(1,8 \cdot 10^{308}\)) \\
+        \pause{}
+        och riskerar avrundningsfel:
+        \pause{}
+
+\begin{verbatim}
+>>> (0.1 + 0.2) * 10 == 3.0
+\end{verbatim}
+\vspace{-0.5em}
+\pause{}
+\begin{verbatim}
+False
+\end{verbatim}
+\pause{}
+\begin{verbatim}
+>>> 0.1 + 0.2
+0.30000000000000004
+\end{verbatim}
+\vspace{-0.5em}
+
+      \pause{}
+      \item Sanningsvärden (\texttt{bool})
+
+      \pause{}
+      \item Null-värdet (\texttt{None})
+
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Datatyper -- Sammansatta datatyper}
+
+    \pause{}
+
+    \begin{itemize}
+      \item Listor
+
+      Sparar en hög med element (inte nödvändigtvis av samma datatyp).
+
+      \pause{}
+
+      \item Tupler
+
+      Som listor, men de går inte att modifiera.
+
+      \pause{}
+
+      \item Dictionaries
+
+      Associerar ett värde till en nyckel. Typ som en lista som du ''indexerar''
+      med något arbiträrt.
+
+    \end{itemize}
+
+    \pause{}
+
+    \begin{minted}{python}
+>>> my_dict = {"banan": "gul", "äpple": "grön"}
+>>> my_dict["banan"]
+"gul"
+    \end{minted}
+
+
+  \end{frame}
+
+  \begin{frame}[fragile]
     \frametitle{Uppgift: \texttt{find\_uncut}}
 
-    Om \texttt{True} är en klippt ruta och \texttt{False} är en oklippt ruta,
-    returnera en lista över alla oklippta rutors koordinater.
+    Om \texttt{True} är en klippt gräsruta och \texttt{False} är en oklippt
+    gräsruta, returnera en lista över alla oklippta rutors koordinater.
 
     \begin{minted}{python}
 >>> find_uncut([
@@ -135,8 +218,6 @@ def min_max(seq):
   \begin{frame}
     \frametitle{Hur en rekursiv funktion kan analyseras}
 
-    (Ingen specifik ordning)
-
     \begin{itemize}
       \item Vad är basfallen?
       \item Hur delas problemet upp i samma problem i mindre delar?
@@ -180,6 +261,14 @@ def min_max(seq):
 
   \end{frame}
 
+  \begin{frame}
+
+    \begin{center}
+      \Huge Paus?
+    \end{center}
+
+  \end{frame}
+
   \begin{frame}[fragile]
     \frametitle{Uppgift: palindrom}
 
@@ -216,13 +305,67 @@ def palin_rec(s):
     \vspace{-1.5em}
     \pause{}
     \begin{minted}{python}
-    return s[0] == s[-1] \
+    return palin_rec(s[1:-1]) \
     \end{minted}
     \vspace{-1.5em}
     \pause{}
     \begin{minted}{python}
-            and palin_rec(s[1:-1])
+            and s[0] == s[-1]
     \end{minted}
+
+    \pause{}
+
+    ABBA
+
+    kajak
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+
+    Iterativt blir det att vi beskriver \emph{hur} snarare än
+    \emph{vad}.
+
+    \begin{minted}{python}
+def palin_iter(s):
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+    mid = len(s) // 2
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+    for i in range(mid):
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+        if s[i] != s[-(i + 1)]:
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+            return False
+    \end{minted}
+    \vspace{-1.5em}
+    \pause{}
+    \begin{minted}{python}
+    return True
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Allmänt om rekursion}
+
+    Väldigt bra på att lösa vissa typer av problem, främst problem som
+    innehåller rekursiva strukturer. Exempel: trädstrukturer och uttrycksparsing
+    (båda i labb 4).
+
+    Föredrog ni \texttt{palin\_rec} eller \texttt{palin\_iter}? Var den ena
+    lättare än den andra att skriva / förstå? (Inte nödvändigtvis samma sak.)
 
   \end{frame}
 
@@ -244,4 +387,72 @@ def dict_func(d):
     \end{minted}
 
   \end{frame}
+
+  \begin{frame}
+    \frametitle{Talbaser -- decimala tal}
+
+    \(1234 \pause{} = \underset{\times 10^3}{1} \pause{}\ \underset{\times 10^2}{2} \pause{}\ \underset{\times 10^1}{3} \pause{}\ \underset{\times 10^0}{4} \pause{} = 1 \cdot 10^3 \pause{} + 2 \cdot 10^2 \pause{} + 3 \cdot 10^1 \pause{} + 4 \cdot 10^0\)
+
+    \pause{}
+
+    Decimalt talsystem: 10 siffror (0-9)
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Talbaser -- binära tal}
+
+    Binärt talsystem: 2 siffror (0-1)
+
+    \pause{}
+
+    \(101010\pause{}_2 \pause{} = \underset{\times 2^5}{1} \pause{}\ \underset{\times 2^4}{0} \pause{}\ \underset{\times 2^3}{1} \pause{}\ \underset{\times 2^2}{0} \pause{}\ \underset{\times 2^1}{1} \pause{}\ \underset{\times 2^0}{0}\)
+
+    \pause{}
+
+    \vspace{-0.5em}
+
+    \(= 2^5 \pause{} + 2^3 \pause{} + 2^1 \pause{} = 32 + 8 + 2 \pause{} = 42\pause{}_{10}\)
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Talbaser -- Decimala decimaltal}
+
+    \pause{}
+
+    Fortsätter åt höger med negativa exponenter
+
+    \pause{}
+
+    \(12,34 \pause{} = \underset{\times 10^1}{1} \pause{}\ \underset{\times 10^0}{2} \pause{}\ , \pause{}\ \underset{\times 10^{-1}}{3} \pause{}\ \underset{\times 10^{-2}}{4} \pause{} = 1 \cdot 10 \pause{} + 2 \cdot 1 \pause{} + 3 \cdot 0,1 \pause{} + 4 \cdot 0,01\)
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Talbaser -- Binära decimaltal}
+
+    \pause{}
+
+    \(101,010_2 \pause{} = \underset{\times 2^2}{1} \pause{}\ \underset{\times 2^1}{0} \pause{}\ \underset{\times 2^0}{1} \pause{}\ , \pause{}\ \underset{\times 2^{-1}}{0} \pause{}\ \underset{\times 2^{-2}}{1} \pause{}\ \underset{\times 2^{-3}}{0}\)
+
+    \pause{}
+
+    \vspace{-0.5em}
+
+    \(= 2^2 + 2^0 + 2^{-2} = 4 + 1 + 0,25 = 5,25 \)
+
+    \pause{}
+
+    Vissa tal \(\in \ ]0, 1[\) går inte att representera exakt med ett binärt
+    talsystem, på samma sätt som \(\frac{1}{3}\) inte går att representera exakt
+    med ett decimalt talsystem (\(0,333\dots\)).
+
+    \pause{}
+
+    Flyttal i datorsystem är lite annorlunda (IEEE 754) men resultatet är
+    detsamma.
+
+  \end{frame}
+
 \end{document}
