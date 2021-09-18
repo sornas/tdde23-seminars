@@ -1,0 +1,296 @@
+\documentclass{beamer}
+
+\usecolortheme{seagull}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{roboto}
+\usepackage[scaled=0.9]{roboto-mono}
+\usepackage[T1]{fontenc}
+
+\usepackage{booktabs}
+\usepackage{icomma} % smart ',' in math mode
+\usepackage{minted} % code with syntax highlighting
+\usepackage[normalem]{ulem} % strikethrought
+\usepackage{url}
+
+\title{Seminarium 03}
+\subtitle{Experimentering}
+\date{21 september 2021}
+\author{Gustav Sörnäs}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \begin{frame}{Seminarieformen}
+
+    Ibland läsa kod och diskutera frågor, ibland skriva kod i mindre grupper.
+    Sedan diskussion i helklass.
+
+    Innan seminariet: läs förberedelsematerialet och försök er på uppgifterna.
+
+    Skicka in lösningar så vi kan diskutera i helklass:
+    \texttt{seminarium.sörnäs.se}. Anonymt, sålänge du inte skriver ditt namn i
+    koden :)
+
+  \end{frame}
+
+  \begin{frame}{Dagens seminarium}
+
+    \begin{itemize}
+      \item Läsbar kod
+      \item Snygga till dålig kod
+      \item Uppgift: metoder
+      \item Uppgift: dubbelrekursion
+      \item Uppgift: dictionary
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}{Läsbar kod}
+
+    Korten i en kortlek är numrerade mellan 1 och 52. Skriv en loop som går
+    igenom alla kort i kortleken.
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Läsbar kod}
+
+    \begin{minted}{python}
+for i in range(1, 53):
+    ...
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Läsbar kod}
+
+    \begin{minted}{python}
+for card_nr in range(1, 53):
+    ...
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Läsbar kod}
+
+    \begin{minted}{python}
+deck_size = 52
+for card_nr in range(1, deck_size + 1):
+    ...
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Läsbar kod}
+
+    \begin{minted}{python}
+deck_size = 52
+for card_nr in range(1, deck_size + 1):
+    ...
+
+for card_nr in range(1, deck_size + 1):
+    ...
+
+for card_nr in range(1, deck_size + 1):
+    ...
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Läsbar kod}
+
+    \begin{minted}{python}
+DECK_SIZE = 52
+for card_nr in range(1, DECK_SIZE + 1):
+    ...
+
+for card_nr in range(1, DECK_SIZE + 1):
+    ...
+
+for card_nr in range(1, DECK_SIZE + 1):
+    ...
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Metoder}
+
+    Skriv funktioner som manipulerar strängar på olika sätt. Välj själva! \pause{}Några
+    förslag:
+
+    {
+      \ttfamily
+      \begin{tabular}{l l}
+        Indata & Utdata \\\toprule
+        Hello noob & h3ll0 n00b \\
+        Tvätta händerna & Tvätta händerna, nollan. \\
+        Super sale & !!!SUPER SALE!!! \\
+        snake\_to\_camel & snakeToCamel \\
+        /linux/to/windows & C:\textbackslash{}linux\textbackslash{}to\textbackslash{}windows \\
+        Por que no los dos? & ¿Por que no los dos? \\
+        Jag är vilse & Jojagog äror vovilolsose \\
+        Best idea ever & Best. Idea. Ever. \\
+      \end{tabular}
+    }
+
+    \pause{}
+
+    \begin{minted}{python}
+>>> leetspeak("Hello noob")
+"h3ll0 n00b"
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Dubbelrekursion}
+
+    Iteration för att gå igenom en lista:
+
+    \begin{minted}{python}
+def print_values(values):
+    for value in values:
+        print(value)
+
+>>> numbers = [1, 2, 5]
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Dubbelrekursion}
+
+    Rekursion för att gå igenom en lista:
+
+    \begin{minted}{python}
+def print_values(values):
+    if values:
+        print(values[0])
+        print_values(values[1:])
+
+>>> numbers = [1, 2, 5]
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Dubbelrekursion}
+
+    Hybridlösning för att gå igenom en lista som kanske innehåller fler listor:
+
+    \begin{minted}{python}
+def print_values(values):
+    for value in values:
+        if isinstance(value, list):
+            print_values(values)
+        else:
+            print(value)
+
+>>> numbers = [1, [2], [[[5]], 6]]
+
+    \end{minted}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Dubbelrekursion}
+
+    Dubbelrekursion för att gå igenom en lista som kanske innehåller fler listor:
+
+    \begin{minted}{python}
+def print_values(values):
+    if values:
+        if isinstance(values[0], list):
+            print_values(values[0])
+        else:
+            print(values[0])
+        print_values(values[1:])
+
+>>> numbers = [1, [2], [[[5]], 6]]
+
+    \end{minted}
+
+  \end{frame}
+  \begin{frame}[fragile]{Dubbelrekursion --- uppgift}
+
+    Skriv en funktion som går igenom en lista och dess underlistor och
+    returnerar elementet med det största värdet.
+
+    Tips:
+
+    \vspace{-1em}
+
+    \begin{itemize}
+
+      \item Rekursionen kommer alltid bara kolla på första elementet
+      (\texttt{values[0]}) och resten av listan (\texttt{values[1:]}).
+
+      \item Fundera på vad som händer om:
+
+      \begin{enumerate}
+        \item Den inskickade listan innehåller bara ett element.
+        \item Det första elementet är en lista.
+        \item Det första elementet inte är en lista.
+        \item (Några fler fall som ni får lista ut själva.)
+      \end{enumerate}
+
+      Kan vissa av de här ske samtidigt? Vad händer då?
+
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}{Dubbelrekursion --- diskussionsfrågor}
+
+    I vilken ordning kommer elementen besökas i listan \\ \texttt{[0, [7, [1, 27], 2], 3]}?
+
+    Vad och var behöver vi ändra för att ändra ordningen elementen besöks i?
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Dictionary --- uppgift}
+
+    Skriv en funktion \texttt{flatten\_dict} som givet ett dictionary av
+    dictionaries returernar ett nytt ''platt'' dictionary.
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{minted}[fontsize=\footnotesize]{python}
+>>> data = {
+        "a": {
+            "a": {
+                "python": 1,
+                "java": 2
+            },
+            "b": {}
+        },
+        "b": {
+            "c": 3
+        },
+    }
+>>> flatten_dict(data)
+{'python': 1, 'java': 2, 'c': 3}
+        \end{minted}
+      \end{column}
+      \begin{column}{0.48\textwidth}
+
+        \begin{itemize}
+          \item \texttt{a | b} kombinerar två dictionaries. Testa!
+        \end{itemize}
+
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+\end{document}
