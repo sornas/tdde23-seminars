@@ -54,7 +54,7 @@
       \item Läsbar kod
       \item Snygga till dålig kod
       \item Uppgift: metoder
-      \item Uppgift: dubbelrekursion
+      \item Uppgift: rekursiva listor
       \item Uppgift: dictionary
     \end{itemize}
 
@@ -156,7 +156,7 @@ for card_nr in range(1, DECK_SIZE + 1):
 
   \end{frame}
 
-  \begin{frame}[fragile]{Dubbelrekursion}
+  \begin{frame}[fragile]{Rekursiva listor}
 
     Iteration för att gå igenom en lista:
 
@@ -170,13 +170,15 @@ def print_values(values):
 
   \end{frame}
 
-  \begin{frame}[fragile]{Dubbelrekursion}
+  \begin{frame}[fragile]{Rekursiva listor}
 
     Rekursion för att gå igenom en lista:
 
     \begin{minted}{python}
 def print_values(values):
-    if values:
+    if not values:
+        return
+    else:
         print(values[0])
         print_values(values[1:])
 
@@ -185,9 +187,15 @@ def print_values(values):
 
   \end{frame}
 
-  \begin{frame}[fragile]{Dubbelrekursion}
+  \begin{frame}[fragile]{Rekursiva listor}
 
-    Hybridlösning för att gå igenom en lista som kanske innehåller fler listor:
+    Ibland har vi listor i listor, en \emph{rekursiv struktur}.
+
+    \pause{}
+
+    for-loop för att gå igenom den yttre listan och rekursion för att gå igenom de inre listorna:
+
+    \pause{}
 
     \begin{minted}{python}
 def print_values(values):
@@ -203,28 +211,32 @@ def print_values(values):
 
   \end{frame}
 
-  \begin{frame}[fragile]{Dubbelrekursion}
+  \begin{frame}[fragile]{Rekursiva listor}
 
-    Dubbelrekursion för att gå igenom en lista som kanske innehåller fler listor:
+    Rekursion för att gå igenom både den yttre listan och de inre listorna:
 
     \begin{minted}{python}
 def print_values(values):
-    if values:
-        if isinstance(values[0], list):
-            print_values(values[0])
-        else:
-            print(values[0])
-        print_values(values[1:])
+    if not values:
+        return
+    elif isinstance(values[0], list):
+        print_values(values[0])
+    else:
+        print(values[0])
+    print_values(values[1:])
+
 
 >>> numbers = [1, [2], [[[5]], 6]]
 
     \end{minted}
 
   \end{frame}
-  \begin{frame}[fragile]{Dubbelrekursion --- uppgift}
 
-    Skriv en funktion som går igenom en lista och dess underlistor och
-    returnerar elementet med det största värdet.
+  %TODO prata om när den ena föredras framför den andra?
+
+  \begin{frame}[fragile]{Rekursiva listor --- uppgift}
+
+    Skriv en funktion som går summerar en lista och dess underlistor.
 
     Tips:
 
@@ -238,10 +250,10 @@ def print_values(values):
       \item Fundera på vad som händer om:
 
       \begin{enumerate}
-        \item Den inskickade listan innehåller bara ett element.
+        \item Den inskickade listan är tom.
         \item Det första elementet är en lista.
-        \item Det första elementet inte är en lista.
-        \item (Några fler fall som ni får lista ut själva.)
+        \item Det första elementet inte är en lista. \\
+        \dots{}
       \end{enumerate}
 
       Kan vissa av de här ske samtidigt? Vad händer då?
@@ -250,7 +262,7 @@ def print_values(values):
 
   \end{frame}
 
-  \begin{frame}{Dubbelrekursion --- diskussionsfrågor}
+  \begin{frame}{Rekursiva listor --- diskussionsfrågor}
 
     I vilken ordning kommer elementen besökas i listan \\ \texttt{[0, [7, [1, 27], 2], 3]}?
 
