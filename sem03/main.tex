@@ -52,7 +52,6 @@
 
     \begin{itemize}
       \item Läsbar kod
-      \item Snygga till dålig kod
       \item Uppgift: metoder
       \item Uppgift: rekursiva listor
       \item Uppgift: dictionary
@@ -189,7 +188,7 @@ def print_values(values):
 
   \begin{frame}[fragile]{Rekursiva listor}
 
-    Ibland har vi listor i listor, en \emph{rekursiv struktur}.
+    Ibland har vi t.ex. listor i listor, en typ av \emph{rekursiv struktur}.
 
     \pause{}
 
@@ -236,7 +235,9 @@ def print_values(values):
 
   \begin{frame}[fragile]{Rekursiva listor --- uppgift}
 
-    Skriv en funktion som går summerar en lista och dess underlistor.
+    Skriv en funktion \texttt{find\_length(length, values)} som letar efter ord
+      av längd \texttt{length} i en lista (\texttt{values}) och dess underlistor
+      (eventuellt med ytterligare listor).
 
     Tips:
 
@@ -259,14 +260,6 @@ def print_values(values):
       Kan vissa av de här ske samtidigt? Vad händer då?
 
     \end{itemize}
-
-  \end{frame}
-
-  \begin{frame}{Rekursiva listor --- diskussionsfrågor}
-
-    I vilken ordning kommer elementen besökas i listan \\ \texttt{[0, [7, [1, 27], 2], 3]}?
-
-    Vad och var behöver vi ändra för att ändra ordningen elementen besöks i?
 
   \end{frame}
 
