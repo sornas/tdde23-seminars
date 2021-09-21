@@ -2,7 +2,7 @@ def flatten_dict(data):
     flat = {}
     for key, val in data.items():
         if isinstance(val, dict):
-            flat |= flatten_dict(val)
+            flat = flat | flatten_dict(val)
         else:
             flat[key] = val
     return flat

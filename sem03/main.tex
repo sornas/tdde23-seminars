@@ -204,7 +204,7 @@ def print_values(values):
 def print_values(values):
     for value in values:
         if isinstance(value, list):
-            print_values(values)
+            print_values(value)
         else:
             print(value)
 
@@ -240,8 +240,8 @@ def print_values(values):
   \begin{frame}[fragile]{Rekursiva listor --- uppgift}
 
     Skriv en funktion \texttt{find\_length(length, values)} som letar efter ord
-      av längd \texttt{length} i en lista (\texttt{values}) och dess underlistor
-      (eventuellt med ytterligare listor).
+      av längd \texttt{length} i en lista av strängar (\texttt{values}) och dess
+      underlistor (eventuellt med ytterligare listor).
 
     Tips:
 
