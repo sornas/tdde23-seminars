@@ -1,0 +1,114 @@
+\documentclass{beamer}
+
+\usecolortheme{seagull}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{roboto}
+\usepackage[scaled=0.9]{roboto-mono}
+\usepackage[T1]{fontenc}
+
+\usepackage{booktabs}
+\usepackage{icomma} % smart ',' in math mode
+\usepackage{minted} % code with syntax highlighting
+\usepackage[normalem]{ulem} % strikethrought
+\usepackage{url}
+
+\title{Seminarium 04}
+\subtitle{Experimentering}
+\date{28 september 2021}
+\author{Gustav Sörnäs}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \begin{frame}{Seminarieformen}
+
+    Ibland läsa kod och diskutera frågor, ibland skriva kod i mindre grupper.
+    Sedan diskussion i helklass.
+
+    Innan seminariet: läs förberedelsematerialet och försök er på uppgifterna.
+
+    Skicka in lösningar så vi kan diskutera i helklass:
+    \texttt{seminarium.sörnäs.se}. Anonymt, sålänge du inte skriver ditt namn i
+    koden :>
+
+  \end{frame}
+
+  \begin{frame}{Dagens seminarium}
+
+    \begin{itemize}
+      \item Uppgift: listbyggare
+      \item Uppgift: git
+      \item Uppgift: att få hjälp
+      \item Uppgift: programutvecklingsprocessen
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}{Listbyggare}
+
+    \footnotesize
+
+    \pause{}
+
+    \begin{enumerate}[<+->]
+      \item Alla tal större än eller lika med noll. \\
+            \texttt{[1, 4, -2, 3.3] => [1, 4, 3.3]}
+
+      \item Näst minsta talet i varje lista. Input är en lista av listor (på 1
+            nivå, så ingen rekursion). Anta att det alltid finns minst två element. \\
+            \texttt{[[1, 2, 3], [4, 6, 5, 7]] => [2, 5]} \\
+            Tips: kolla på \texttt{sorted}.
+
+      \item Alla ord som innehåller minst ett \texttt{a}, men alla \texttt{a}:n
+            är utbytta mot \texttt{*}. \\
+            \texttt{[''apa'', ''citron'', ''apelsin''] => [''*p*'', ''*pelsin'']}
+
+      \item Alla tal 0--100 som är jämnt delbara med 3 eller 5, men
+            \emph{inte} båda. \\
+            \texttt{=> [3, 5, 6, 9, 10, 12, 18, 20, ...]}
+
+      \item En 5x5-matris fylld med nollor. \\
+            \texttt{=> [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], ... (x5 totalt)]}
+
+      \item En 5x5-identitetsmatris, alltså en 5x5-matris med ettor på
+            \emph{diagonalen} och nollor överallt annars. (Gör sig bättre uppritad.) \\
+            \texttt{=> [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], ...]}
+
+      % todo: gör i ordning några listiga lösningar
+
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}{git}
+
+  \end{frame}
+
+  \begin{frame}{Hjälp}
+
+  \end{frame}
+
+  \begin{frame}{Dokumentationen}
+
+  \end{frame}
+
+  \begin{frame}{Programutvecklingsprocessen}
+
+  \end{frame}
+
+\end{document}
