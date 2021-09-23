@@ -1,8 +1,12 @@
-# TDDE23 - seminarier
+# TDDE23 - seminars
 
-Seminarier jag håller som en del av https://www.ida.liu.se/~TDDE23/. Materialet
-kommer mestadels från kursansvarige och syftet med de här presentationerna är så
-jag har något förberett att visa på projektorn.
+These seminars are held as part of an introductory Python course at Linköping
+University. The material is mostly in Swedish (apart from the code) and as such,
+the rest of the README will also be in Swedish.
+
+De här seminarierna håller jag som en del av https://www.ida.liu.se/~TDDE23/.
+Materialet kommer mestadels från kursansvarige och syftet med de här
+presentationerna är så jag har något förberett att visa på projektorn.
 
 ## Status
 
