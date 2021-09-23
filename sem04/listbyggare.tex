@@ -16,7 +16,7 @@
   \UL}
 \makeatother
 
-\lstset{basicstyle=\ttfamily,language=python,escapeinside=||}
+\lstset{basicstyle=\ttfamily\footnotesize,language=python,escapeinside=||}
 
 \begin{frame}[fragile]{Listbyggare}
 
@@ -77,7 +77,84 @@ def distribute(elem, lists):
 
   \begin{lstlisting}
 def distribute(elem, lists):
-    return |\sethlcolor{orange}\hl{[lst + [elem]}| |\sethlcolor{cyan}\hl{for lst in lists}|]
+    return [|\sethlcolor{orange}\hl{lst + [elem]}| |\sethlcolor{cyan}\hl{for lst in lists}|]
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Listbyggare som ett filter}
+  \begin{lstlisting}
+def filter_strings(values):
+    only_strings = []
+    for val in values:
+        if isinstance(val, str):
+            only_strings.append(val)
+    return only_strings
+  \end{lstlisting}
+
+  \begin{lstlisting}
+def filter_strings(values):
+    return [val for val in values if isinstance(val, str)]
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Listbyggare som ett filter}
+  \begin{lstlisting}
+def filter_strings(values):
+    only_strings = []
+    for val in values:
+        |\sethlcolor{orange}\hl{if isinstance(val, str)}|:
+            only_strings.append(val)
+    return only_strings
+  \end{lstlisting}
+
+  \begin{lstlisting}
+def filter_strings(values):
+    return [val for val in values |\sethlcolor{orange}\hl{if isinstance(val, str)}|]
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Listbyggare med två loopar}
+
+  Övning 402: Konstruera en funktion all\_pairs som utifrån en lista ger en lista
+  med alla par, d.v.s. alla möjliga sätt att kombinera två element ur
+  originallistan.
+
+  \begin{lstlisting}
+def all_pairs(values):
+    pairs = []
+    for val1 in values:
+        for val2 in values:
+            pairs.append((val1, val2))
+    return pairs
+  \end{lstlisting}
+
+  \vspace{2.35\baselineskip} % manually tested
+
+\end{frame}
+
+\begin{frame}[fragile]{Listbyggare med två loopar}
+
+  Övning 402: Konstruera en funktion all\_pairs som utifrån en lista ger en lista
+  med alla par, d.v.s. alla möjliga sätt att kombinera två element ur
+  originallistan.
+
+  \begin{lstlisting}
+def all_pairs(values):
+    pairs = []
+    |\sethlcolor{orange}\hl{for val1 in values}|:
+        |\sethlcolor{cyan}\hl{for val2 in values}|:
+            pairs.append((|\sethlcolor{orange}\hl{val1}|, |\sethlcolor{cyan}\hl{val2}|))
+    return pairs
+  \end{lstlisting}
+
+  \pause{}
+
+  \begin{lstlisting}
+def all_pairs(values):
+    return [(|\sethlcolor{orange}\hl{val1}|, |\sethlcolor{cyan}\hl{val2}|) |\sethlcolor{cyan}\hl{for val2 in values}| |\sethlcolor{orange}\hl{for val1 in values}|]
   \end{lstlisting}
 
 \end{frame}
