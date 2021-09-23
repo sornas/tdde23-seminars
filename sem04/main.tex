@@ -11,10 +11,18 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{booktabs}
+\usepackage{color}
 \usepackage{icomma} % smart ',' in math mode
-\usepackage{minted} % code with syntax highlighting
+\usepackage{soul} % highlight and underline (etc)
 \usepackage[normalem]{ulem} % strikethrought
 \usepackage{url}
+
+\usepackage{listings} % code listings
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+\setul{0.5ex}{0.3ex}
 
 \title{Seminarium 04}
 \subtitle{Experimentering}
@@ -53,13 +61,15 @@
     \begin{itemize}
       \item Uppgift: listbyggare
       \item Uppgift: git
-      \item Uppgift: att få hjälp
+      \item Uppgift: hjälp
       \item Uppgift: programutvecklingsprocessen
     \end{itemize}
 
   \end{frame}
 
-  \begin{frame}{Listbyggare}
+  \input{listbyggare}
+
+  \begin{frame}{Listbyggare --- uppgift}
 
     \footnotesize
 

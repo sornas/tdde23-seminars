@@ -1,0 +1,83 @@
+% fix for soul in beamer
+% https://tex.stackexchange.com/questions/41683/why-is-it-that-coloring-in-soul-in-beamer-is-not-visible
+\makeatletter
+\let\HL\hl
+\renewcommand\hl{%
+  \let\set@color\beamerorig@set@color
+  \let\reset@color\beamerorig@reset@color
+  \HL}
+\makeatother
+
+\makeatletter
+\let\UL\ul
+\renewcommand\ul{%
+  \let\set@color\beamerorig@set@color
+  \let\reset@color\beamerorig@reset@color
+  \UL}
+\makeatother
+
+\lstset{basicstyle=\ttfamily,language=python,escapeinside=||}
+
+\begin{frame}[fragile]{Listbyggare}
+
+  Övning 404: Konstruera en funktion \texttt{distribute} som tar ett element och
+  en lista av listor, och lägger in elementet i varje dellista.
+
+  \pause{}
+
+  \begin{lstlisting}
+def distribute(elem, lists):
+    distributed = []
+    for lst in lists:
+        distributed.append(lst + [elem])
+    return distributed
+  \end{lstlisting}
+
+  \pause{}
+
+  \begin{lstlisting}
+def distribute(elem, lists):
+    return [lst + [elem] for lst in lists]
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Listbyggare, men med färger}
+
+  Övning 404: Konstruera en funktion \texttt{distribute} som tar ett element och
+  en lista av listor, och lägger in elementet i varje dellista.
+
+  \begin{lstlisting}
+def distribute(elem, lists):
+    |\sethlcolor{orange}\hl{distributed = []}|
+    for |\sethlcolor{cyan}\hl{lst in lists}|:
+        |\sethlcolor{orange}\hl{distributed.append}|(|\sethlcolor{cyan}\hl{lst}| + [elem])
+    return distributed
+  \end{lstlisting}
+
+  \begin{lstlisting}
+def distribute(elem, lists):
+    return [lst + [elem] for lst in lists]
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Listbyggare, men med färger}
+
+  Övning 404: Konstruera en funktion \texttt{distribute} som tar ett element och
+  en lista av listor, och lägger in elementet i varje dellista.
+
+  \begin{lstlisting}
+def distribute(elem, lists):
+    distributed = []
+    |\sethlcolor{cyan}\hl{for lst in lists}|:
+        distributed.append(|\sethlcolor{orange}\hl{lst + [elem]}|)
+    return distributed
+  \end{lstlisting}
+
+  \begin{lstlisting}
+def distribute(elem, lists):
+    return |\sethlcolor{orange}\hl{[lst + [elem]}| |\sethlcolor{cyan}\hl{for lst in lists}|]
+  \end{lstlisting}
+
+\end{frame}
