@@ -1,5 +1,7 @@
 \documentclass{beamer}
 
+% vim: shiftwidth=2
+
 \usecolortheme{seagull}
 \usefonttheme{structurebold}
 
@@ -112,38 +114,61 @@
 
     Hittils: add - commit - push.
 
-    Men vad händer i varje steg?
+    \pause{}
+
+    \begin{itemize}[<+->]
+      \item add: markera filer som ''dom här vill jag spara''.
+      \item commit: spara dom markerade filerna i en \emph{commit}.
+      \item push: synkronisera mina commits med Gitlabs.
+    \end{itemize}
 
   \end{frame}
 
-  %TODO
-  \begin{frame}{git - filernas tre states}
+  \begin{frame}{git - varför ni använder det}
 
-    \begin{description}
-      \item[add] Ändringar i ett \emph{working tree}
-    \end{description}
+    \pause{}
+
+    \begin{itemize}[<+->]
+      \item Det blir tröttsamt att maila kod till sig själv.
+      \item Arbeta parallellt på egen dator / LiU:s datorer.
+      \item Arbeta två+ personer parallellt. (TDDE25)
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}{git - mer saker ni kan göra}
+
+    \begin{itemize}
+      \item pull: hämta commits från en server.
+      \item log: se en lista över ändringar som skett.
+      \item restore: återställ koden till en tidigare version.
+    \end{itemize}
 
   \end{frame}
 
   \begin{frame}{git - hur ni tar er vidare}
 
-    Den officiella git-boken: \url{https://git-scm.com/book/en/v2}. Introducerar
-    git bra och går mot slutet väldigt djupt in i hur det fungerar på insidan,
-    för den intresserade.
+    \pause{}
+
+    Den officiella git-boken: \url{https://git-scm.com/book/en/v2}. Från vanlig
+    användning till hur det fungerar på insidan.
+
+    \pause{}
 
     En git-föreläsning jag var med och höll i vintras:
-    \url{https://youtu.be/Db1XV8UTM1M}. Första halvan är mer relevant för
-    tillfället men andra halvan kan vara kul inför projektet i TDDE25.
+    \url{https://youtu.be/Db1XV8UTM1M}. Andra halvan inte lika relevant (än).
     
-    Fråga labbassistenten. Vårt huvudsakliga jobb är att svara på frågor!
+    \pause{}
+
+    Labbassistenten!
 
   \end{frame}
 
   \begin{frame}{git - sökmotorer}
 
-    Svar i forum-liknande format (som StackOverflow) svarar ofta på en väldigt
-      specifik fråga, men ni håller på att lära er dom absoluta grunderna.
-      Avrådes om ni inte vet vad ni håller på med.
+    Svar i forum-liknande format (som StackOverflow). Svarar ofta på en väldigt
+    specifik fråga, men ni håller på att lära er dom absoluta grunderna.
+    Avrådes om ni inte vet vad ni håller på med.
 
   \end{frame}
 
