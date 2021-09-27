@@ -62,8 +62,9 @@
 
     \begin{itemize}
       \item Uppgift: listbyggare
-      \item Uppgift: git
-      \item Uppgift: hjälp
+      \item git
+      \item Hjälp
+      \item Dokumentation
       \item Uppgift: programutvecklingsprocessen
     \end{itemize}
 
@@ -136,19 +137,20 @@
 
   \end{frame}
 
-  \begin{frame}{git - mer saker ni kan göra}
+  \begin{frame}{git - några vanliga saker ni kan göra}
+
+    Hur gör ni dom här sakerna med git? Ta reda på valfritt sätt!
 
     \begin{itemize}
-      \item pull: hämta commits från en server.
-      \item log: se en lista över ändringar som skett.
-      \item restore: återställ koden till en tidigare version.
+      \item Visa en lista av alla commits.
+      \item Kolla vilka ändringar som skedde för 3 commits sedan.
+      \item Återställ en fil med hur den såg ut i en tidigare commit.
+      \item Kasta bort ändringar sedan senaste commiten.
+      \item Skapa en commit med ändringar från bara vissa filer, inte alla.
     \end{itemize}
-
   \end{frame}
 
   \begin{frame}{git - hur ni tar er vidare}
-
-    \pause{}
 
     Den officiella git-boken: \url{https://git-scm.com/book/en/v2}. Från vanlig
     användning till hur det fungerar på insidan.
@@ -161,14 +163,6 @@
     \pause{}
 
     Labbassistenten!
-
-  \end{frame}
-
-  \begin{frame}{git - sökmotorer}
-
-    Svar i forum-liknande format (som StackOverflow). Svarar ofta på en väldigt
-    specifik fråga, men ni håller på att lära er dom absoluta grunderna.
-    Avrådes om ni inte vet vad ni håller på med.
 
   \end{frame}
 
@@ -192,7 +186,6 @@
 
   \end{frame}
 
-  %TODO
   \begin{frame}{Programutvecklingsprocessen}
 
     \begin{enumerate}
@@ -204,16 +197,43 @@
       \item Underhåll
     \end{enumerate}
 
+    \pause{}
+
     \begin{tabular}{r l}
-    1--3: & Ni \\
-    4--5: & Jag \\
-    6: & Någon annan
+      1--3: & Ni \\
+      4--5: & Jag \\
+      6: & Någon annan
     \end{tabular}
 
   \end{frame}
 
-  \begin{frame}{Uppgiften}
-    TODO
+  \begin{frame}{Programutvecklingsprocessen --- uppgiften}
+
+    Tentauppgift från förra året.
+
+    \pause{}
+
+    Skriv en funktion som exekverar ett program i det påhittade språket PyASM.
+
+    Ett program består av en lista av instruktioner. En instruktion består av en
+    tuple som innehåller en sträng och 1 eller fler argument.
+
+    Programmet kan under körningen använda ett antal \emph{register} som är
+    bokstäverna A--Z. Register innehåller heltal. Oanvända register har värdet
+    0.
+
+  \end{frame}
+
+  \begin{frame}{Programutvecklingsprocessen --- instruktionerna}
+
+    \begin{itemize}
+      \item \texttt{LOG <register>} skriv ut värdet i registret.
+      \item \texttt{SET <register> <value>} spara ett värde i ett register.
+      \item \texttt{CPY <register> <source>} kopiera värdet från ett register till ett annat.
+      \item \texttt{ADD <register> <value>} lägg till ett värde till ett register.
+      \item \texttt{MUL <register> <value>} multiplicera ett register med ett värde och spara det i samma register.
+    \end{itemize}
+
   \end{frame}
 
 \end{document}
