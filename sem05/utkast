@@ -1,0 +1,25 @@
+- vad är funktionell programmering?
+  - komposition av funktioner
+  - rena funktioner, inga sidoeffekter
+- vad är en sidoeffekt?
+  - exempel med en global variabel som räknar upp
+- varför vill vi inte ha sidoeffekter?
+- vad är högre ordningens funktioner?
+  - exempel där vi skriver och använder högre ordningens funktioner
+- uppgift: skriv count
+- + mer högre ordningens funktioner
+- paus
+- lambda-uttryck
+  - exempel. jämför med "def f(x)"
+- uppgift: skriv några predikatfunktioner som lambdan
+- vad är en iteratorfunktion?
+- vilka funktioner är bra att ha koll på när vi använder iteratorer? visa exempel
+  - list (tuple)
+  - len
+  - any
+  - all
+  - sum
+  - map
+  - filter
+- hur skulle count kunna skrivas med inbygga iteratorfunktioner?
+- + mer uppgifter med iteratorfunktioner (map/filter främst)
