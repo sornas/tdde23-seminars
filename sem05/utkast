@@ -21,5 +21,7 @@
   - sum
   - map
   - filter
+  - max
+  - min
 - hur skulle count kunna skrivas med inbygga iteratorfunktioner?
 - + mer uppgifter med iteratorfunktioner (map/filter främst)

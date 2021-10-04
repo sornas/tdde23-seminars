@@ -21,6 +21,8 @@
 
 \usepackage{listings} % code listings
 
+\lstset{basicstyle=\ttfamily\footnotesize,language=python,escapeinside=||}
+
 \title{Seminarium 05}
 \subtitle{Experimentering}
 \date{5 oktober 2021}
@@ -55,19 +57,268 @@
 
   \begin{frame}{Nästa seminarium}
 
-    Repetitionstillfälle! Säg till om det är något ni vill repetera, antingen
-    nu, efter seminariet eller till mig på mail (\url{gusso230@student.liu.se}).
+    Repetitionstillfälle! Säg till om det är något ni vill repetera på mail
+    till \url{gusso230@student.liu.se}.
 
   \end{frame}
 
   \begin{frame}{Dagens seminarium}
 
     \begin{itemize}
+      \item Funktionell programmering
       \item Uppgift: högre ordningens funktioner
       \item Uppgift: lambdauttryck
-      \item Uppgift: inbyggda iteratorer
+      \item Uppgift: iteratorfunktioner
     \end{itemize}
 
   \end{frame}
+
+  \begin{frame}{Funktionell programmering}
+
+    Vad är funktionell programmering?
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- vanliga funktioner}
+
+    \begin{lstlisting}
+def plus_three(x):
+    return isinstance(x, int) or isinstance(x, float)
+
+>>> is_number(1)
+True
+>>> is_number(1.1)
+True
+>>> is_number("5")
+False
+>>> is_number([3.14])
+False
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- högre ordningens funktioner}
+
+    \begin{lstlisting}
+def is_number(x):
+    return isinstance(x, int) or isinstance(x, float)
+
+def test(first, pred):
+    return pred(first)
+
+>>> test(1, is_number)
+True
+>>> test(1.1, is_number)
+True
+>>> test("5", is_number)
+False
+>>> test([3.14], is_number)
+False
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- högre ordningens funktioner}
+
+    \begin{lstlisting}
+def is_number(x):
+    return isinstance(x, int) or isinstance(x, float)
+
+def both(first, second, pred):
+    return pred(first) and pred(second)
+
+>>> both(1, 2, is_number)
+True
+>>> both(1.1, 5, is_number)
+True
+>>> both("5", 10, is_number)
+False
+>>> both(1, [3.14], is_number)
+False
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- uppgift}
+
+    Skriv en funktion \texttt{count(values, pred)} som går igenom en lista och
+    räknar hur många av elementen som uppfyller ett predikat.
+
+    Kom ihåg att ett predikat är en funktion som testar någonting och
+    returnerar \texttt{True} eller \texttt{False}.
+
+    \begin{lstlisting}
+>>> count([1, 2, "3", 4, "5"], is_number)
+3
+>>> count([1, 2, [3]], is_number)
+2
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- rena funktioner}
+
+    \begin{lstlisting}
+def f(x):
+    return 2 * x
+
+>>> f(1)
+2
+>>> f(2)
+4
+f(1)
+>>> 2
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- sidoeffekter}
+
+    \begin{lstlisting}
+increment = 0
+def g():
+    increment += 1
+    return increment
+
+>>> g()
+1
+>>> g()
+2
+>>> g()
+3
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Lambda-uttryck}
+
+    Vi har sett att funktioner går att använda som värden.
+
+    \begin{lstlisting}
+def double(x):
+    return x * 2
+
+>>> f = double
+>>> f(5)
+10
+>>> f
+<function double at 0x7f0ff6cfbc10>
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Lambda-uttryck}
+
+    \begin{lstlisting}
+def double_f(x):
+    return x * 2
+
+double_l = lambda x: x * 2
+
+>>> double_f(5)
+10
+>>> double_l(5)
+10
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Lambda-uttryck}
+
+    \begin{lstlisting}
+def test(first, pred):
+    return pred(first)
+
+>>> test(1, lambda x: isinstance(x, int))
+True
+>>> test("2", lambda x: isinstance(x, int))
+False
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Lambda-uttryck --- uppgift}
+
+    Med hjälp av \texttt{count} från den tidigare uppgiften, skriv
+    predikatfunktioner som lambdan för att räkna följande:
+
+    \begin{enumerate}
+      \item Antalet förekomster av strängen ''a''.
+      \item Antalet listor som är två element långa.
+      \item Antalet tal som är delbara med tre.
+    \end{enumerate}
+
+    \begin{lstlisting}
+>>> count(["a", "B", "c", "a", "d"], ?)
+2
+>>> count([["a"], [1, 2], ["b", "c"]], ?)
+2
+>>> count([1, 2, 3, 4, 5, 6, 9], ?)
+3
+    \end{lstlisting}
+
+    \begin{lstlisting}
+lambda x: isinstance(x, int) or isinstance(x, float)
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}{Iteratorfunktioner}
+
+    Funktioner som hanterar iteratorer (t.ex. listor) på olika sätt.
+
+    Vissa tar in funktioner som argument.
+
+    Några exempel som kan vara bra att känna till:
+
+    \begin{itemize}
+
+      \item \texttt{list}: gör om en iterator till en lista. Väldigt vanlig.
+
+      \item \texttt{map}: Applicera en funktion på varje element och ge tillbaka
+      en iterator över retur-värdena.
+
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}{Iteratorfunktioner --- andra bra grejer}
+
+    Kolla upp vad dom gör genom att söka i Python-dokumentationen!
+
+    \begin{itemize}
+      \item \texttt{filter}
+      \item \texttt{len}
+      \item \texttt{min}
+      \item \texttt{max}
+      \item \texttt{enumerate}
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Iteratorfunktioner --- count}
+
+    Skriv \texttt{count} från tidigare fast den här gången genom att kombinera
+    inbyggda iteratorfunktioner!
+
+    \begin{lstlisting}
+def count(values, pred):
+    return ?
+    \end{lstlisting}
+
+    \pause{}
+
+    Tips: ni kommer använda 2 av följande 4 funktioner. Vilka? Och hur?
+
+    \begin{itemize}
+      \item \texttt{map}
+      \item \texttt{filter}
+      \item \texttt{len}
+      \item \texttt{min}
+    \end{itemize}
+
+  \end{frame}
+
+  %TODO mer uppgifter med iteratorfunktioner?
 
 \end{document}
