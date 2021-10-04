@@ -57,7 +57,7 @@
 
   \begin{frame}{Nästa seminarium}
 
-    Repetitionstillfälle! Säg till om det är något ni vill repetera på mail
+    Repetitionstillfälle! Säg till om det är något ni vill repetera via mail
     till \url{gusso230@student.liu.se}.
 
   \end{frame}
@@ -204,8 +204,43 @@ def g():
 
   \end{frame}
 
-  \begin{frame}[fragile]{Lambda-uttryck}
+  \begin{frame}[fragile]{Funktionell programmering --- funktioner som värden}
 
+    \begin{lstlisting}
+def f(x):
+    return x
+
+>>> print(f)
+<function f at 0x7f429bac7b80>
+>>> g = f
+>>> g(1)
+1
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Funktionell programmering --- funktioner som värden}
+
+    \begin{lstlisting}
+def create_f():
+    def f(x):
+        return x
+    return f
+
+>>> create_f
+<function create_f at 0x7f429bac7c10>
+>>> g = create_f()
+>>> g
+<function create_f.<locals>.f at 0x7f429bac7ca0>
+>>> g(1)
+1
+>>> create_f()(2)
+2
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Lambda-uttryck}
     Vi har sett att funktioner går att använda som värden.
 
     \begin{lstlisting}
@@ -332,7 +367,5 @@ def count(values, pred):
     \end{itemize}
 
   \end{frame}
-
-  %TODO mer uppgifter med iteratorfunktioner?
 
 \end{document}
