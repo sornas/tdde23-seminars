@@ -55,18 +55,24 @@
 
     \begin{itemize}
       \item Uppgift: testning
+      \item Uppgift: gammal tentauppgift
     \end{itemize}
 
   \end{frame}
 
   \begin{frame}{Testning}
 
-    Varför testa sin kod?
+    \begin{itemize}
+      \item Vad är ett fel?
+      \item När och hur upptäcks fel?
+      \item Vad kan orsaka fel?
+      \item Hur man kan lokalisera och åtgärda fel?
+    \end{itemize}
 
   \end{frame}
 
   \begin{frame}[fragile]{Testing --- uppgift}
-    
+
     \begin{lstlisting}
 def count(seq):
     """
@@ -89,9 +95,33 @@ def count(seq):
 
   \end{frame}
 
-  \begin{frame}
+  \begin{frame}[fragile]{Uppgift: delsekvenser}
 
-    
+    Skriv en funktion \texttt{subseq(seq)} som tar in en sekvens (endast tupler)
+    och returnerar \textit{mängden} av alla delsekvenser. Exempel:
+
+    \pause{}
+    \begin{lstlisting}
+assert subsequences((1)) == {(1,), ()}
+    \end{lstlisting}
+    \pause{}
+    \begin{lstlisting}
+assert subsequences((1, 2)) == {(1,), (1, 2), (2,), ()}
+    \end{lstlisting}
+    \pause{}
+    \begin{lstlisting}
+assert subsequences((1, 1)) == {(1,), (1, 1), ()}
+    \end{lstlisting}
+    \pause{}
+    \begin{lstlisting}
+assert subsequences((1, 2, 3)) == {(1, 3), (1, 2),
+                                   (2,), (1, 2, 3),
+                                   (2, 3), (1,),
+                                   (), (3,)}
+    \end{lstlisting}
+
+    \pause{}
+    Rekursion eller iteration?
 
   \end{frame}
 
