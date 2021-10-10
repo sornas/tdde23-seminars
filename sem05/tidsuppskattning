@@ -1,13 +1,20 @@
-00:15: introduktion
-00:15: funktionell programmering
-00:20: uppgift: count
-00:35:   diskussion
-00:50: funktioner som retur-värden
-00:55: paus
-01:10: lambda
-01:15: uppgift: lambda
-01:30:   diskussion
-01:40: iteratorfunktioner
-01:45: uppgift: iteratorfunktioner
-01:55:   diskussion
-02:00: slut
+00:15 (00:15): introduktion
+00:15 (00:15): funktionell programmering
+00:20 (00:20): uppgift: count
+00:35 (00:35):   diskussion
+      (00:36): uppgift: egen filter
+      (00:46):   diskussion
+00:50 (00:48): funktioner som retur-värden
+00:55 (00:50): paus
+01:10 (01:04): lambda
+01:15 (01:08): uppgift: lambda
+01:30 (01:20):   diskussion
+01:40 (01:22): iteratorfunktioner
+01:45 (01:27): uppgift: iteratorfunktioner
+01:55 (01:42):   diskussion
+      (01:45): map
+02:00 (01:50): slut
+
+repetition:
+rekursion och kanske dubbelrekursion. kolla på tentan vad som brukar dyka upp
+mer iteratorer WOOO
