@@ -1,0 +1,98 @@
+\documentclass{beamer}
+% vim: shiftwidth=2
+
+\usecolortheme{seagull}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{roboto}
+\usepackage[scaled=0.9]{roboto-mono}
+\usepackage[T1]{fontenc}
+
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{icomma} % smart ',' in math mode
+\usepackage{soul} % highlight and underline (etc)
+\usepackage[normalem]{ulem} % strikethrought
+\usepackage{url}
+
+\usepackage{listings} % code listings
+
+\lstset{basicstyle=\ttfamily\footnotesize,language=python,escapeinside=||}
+
+\title{Seminarium 06}
+\subtitle{Experimentering}
+\date{5 oktober 2021}
+\author{Gustav Sörnäs}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \begin{frame}{Seminarieformen}
+
+    Innan seminariet: läs förberedelsematerialet och försök er på uppgifterna.
+
+    Skicka in lösningar så vi kan diskutera i helklass:
+    \texttt{seminarium.sörnäs.se}. Anonymt, sålänge du inte skriver ditt namn i
+    koden :>
+
+  \end{frame}
+
+  \begin{frame}{Dagens seminarium}
+
+    \begin{itemize}
+      \item Uppgift: testning
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}{Testning}
+
+    Varför testa sin kod?
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Testing --- uppgift}
+    
+    \begin{lstlisting}
+def count(seq):
+    """
+    Counts the number of elements in a given list
+    including elements in inner lists
+    """
+    if not seq:
+        return 0
+    elif isinstance(seq[0], list):
+        return count(seq[0]) + count(seq[1:])
+    else:
+        return 1 + count(seq[1:])
+    \end{lstlisting}
+
+    Del 1: Skriv en funktion \texttt{test\_count} (utan parametrar) som testar
+    \texttt{count} med olika indata. Använd \emph{inte} \texttt{assert} utan se till
+    att funktionen returnerar något som går att använda.
+
+    % Fundera över hur olika testfall ska sparas, alltså vilka datastrukturer.
+
+  \end{frame}
+
+  \begin{frame}
+
+    
+
+  \end{frame}
+
+\end{document}
