@@ -1,0 +1,199 @@
+\documentclass{beamer}
+% vim: shiftwidth=2
+
+\usecolortheme{seagull}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{roboto}
+\usepackage[scaled=0.9]{roboto-mono}
+\usepackage[T1]{fontenc}
+
+\usepackage[normalem]{ulem} % strikethrought
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{icomma} % smart ',' in math mode
+\usepackage{listings} % code listings
+\usepackage{soul} % highlight and underline (etc)
+\usepackage{url}
+\usepackage{xcolor}
+
+\lstset{basicstyle=\ttfamily\footnotesize,language=python,escapeinside=||}
+
+\title{Seminarium 07}
+\subtitle{Experimentering}
+\date{2 november 2021}
+\author{Gustav Sörnäs}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \begin{frame}{Dagens seminarium}
+
+    \begin{itemize}
+      \item Uppgift: EBNF
+      \item Uppgift: Identifiera ord
+      \item Uppgift: Prefix
+      \item Uppgift: Primtal i fibonacci
+      \item Uppgift: Relativ sökväg
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{EBNF}
+    \begin{itemize}
+      \item Terminal: något som bara innehåller tecken.
+      \item Regel: något som innehåller regler och terminaler.
+    \end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A = 'a' | 'b' | '' ;
+S = 'a', A | 'b', A ;
+    \end{Verbatim}
+  \end{frame}
+
+  \begin{frame}[fragile]{EBNF}
+    \begin{itemize}
+      \item \colorbox{orange!80}{Terminal}: något som bara innehåller tecken.
+      \item \colorbox{blue!50}{Regel}: något som innehåller regler och terminaler.
+    \end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\colorbox{orange!80}{A} = \colorbox{orange!80}{"a"} | \colorbox{orange!80}{"b"} | \colorbox{orange!80}{""} ;
+\colorbox{blue!50}{S} = \colorbox{orange!80}{"a"}, \colorbox{blue!50}{A} | \colorbox{orange!80}{"b"}, \colorbox{blue!50}{A} ;
+    \end{Verbatim}
+  \end{frame}
+
+  \begin{frame}[fragile]{EBNF}
+    \begin{Verbatim}[commandchars=\\\{\}]
+A = 'a' | 'b' | '' ;
+S = 'a', A | 'b', A ;
+    \end{Verbatim}
+
+    \texttt{S} är startsymbolen, så alla ord som \emph{uppfyller} \texttt{S} är
+    en del av språket.
+
+    \begin{itemize}
+      \item \texttt{ba} är i språket.
+      \item \texttt{baa} är inte i språket.
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{EBNF}
+    \begin{Verbatim}[commandchars=\\\{\}]
+A = \colorbox{blue!50}{'a'} | 'b' | '' ;
+S = 'a', A | \colorbox{blue!50}{'b', A} ;
+    \end{Verbatim}
+
+    \texttt{S} är startsymbolen, så alla ord som \emph{uppfyller} \texttt{S} är
+    en del av språket.
+
+    \begin{itemize}
+      \item \texttt{aa} är i språket.
+      \item \texttt{aab} är inte i språket.
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{EBNF}
+    \begin{Verbatim}[commandchars=\\\{\}]
+A = 'a' | 'b' | '' ;
+S = 'a', A | 'b', A ;
+    \end{Verbatim}
+
+    Alla ord i språket: \texttt{a, aa, ab, b, ba, bb}.
+  \end{frame}
+
+  \begin{frame}[fragile]{EBNF -- Uppgift}
+    Ange alla ord som ingår i följande språk:
+
+    \begin{enumerate}
+      \item \begin{Verbatim}
+S = 'a', A | 'b', B ;
+A = 'a', B | '' ;
+B = 'a' | 'b' ;
+      \end{Verbatim}
+      \item \begin{Verbatim}
+S = 'a', S, 'a' | 'b', S, 'b' | 'a' | 'b' | '' ;
+      \end{Verbatim}
+    \end{enumerate}
+  \end{frame}
+
+  \begin{frame}[fragile]{Identifiera ord}
+
+    \begin{enumerate}
+      \item \begin{Verbatim}
+S = 'a', A | 'b', B ;
+A = 'a', B | '' ;
+B = 'a' | 'b' ;
+      \end{Verbatim}
+      \item \begin{Verbatim}
+S = 'a', S, 'a' | 'b', S, 'b' | 'a' | 'b' | '' ;
+      \end{Verbatim}
+    \end{enumerate}
+
+    Skriv kod som identifierar om en sträng ingår i språk 1 respektive språk 2.
+
+    Tips: Det är svårt att lösa den här uppgiften helt generellt. Fokusera på språk 1 och 2.
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Prefix}
+
+    Skriv funktionen \texttt{contains\_prefixes} som tar två listor med strängar
+    och returnerar om \emph{varje} sträng i den första listan är ett prefix till
+    \emph{någon} av strängarna i den andra listan.
+
+    \begin{lstlisting}
+>>> contains_prefixes(["hej"], ["hejsan", "asdfasdf"])
+True
+>>> contains_prefixes(["hej", "sdf"], ["hejsan", "asdfasdf"])
+False
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}{Primtal i fibonacci-sekvensen}
+
+    Skriv en funktion som returnerar en lista med tal ur fibonacci-serien som
+    dessutom är primtal.
+
+    Funktionen behöver ta in en heltalsparameter men ni får själva bestämma vad
+    den betyder. Det viktiga är att den på något sätt begränsar storleken på
+    listan.
+
+    Dom tio första primtalen i fibonacci-serien:
+    \texttt{[3, 5, 13, 89, 233, 1597, 28657, 514229, 433494437, 2971215073]}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Relativ sökväg}
+
+    Skriv en funktion som givet två sökvägar returnerar en relativ sökväg från
+    den första till den andra.
+
+    \begin{lstlisting}
+/home/gustav/liu/tdde23/seminarium
+/home/gustav/dev/impa
+=>
+../../../dev/impa
+    \end{lstlisting}
+
+  \end{frame}
+
+\end{document}
