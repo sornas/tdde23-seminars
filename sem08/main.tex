@@ -1,0 +1,185 @@
+\documentclass{beamer}
+% vim: shiftwidth=2
+
+\usecolortheme{seagull}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+
+\usepackage{roboto}
+\usepackage[scaled=0.9]{roboto-mono}
+\usepackage[T1]{fontenc}
+
+\usepackage[normalem]{ulem} % strikethrought
+\usepackage{animate}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{icomma} % smart ',' in math mode
+\usepackage{listings} % code listings
+\usepackage{soul} % highlight and underline (etc)
+\usepackage{url}
+\usepackage{xcolor}
+
+\lstset{basicstyle=\ttfamily\footnotesize,language=python,escapeinside=||}
+
+\title{Seminarium 08}
+\subtitle{Experimentering}
+\date{8 november 2021}
+\author{Gustav Sörnäs}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Planering}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \begin{frame}{Dagens seminarium}
+
+    \begin{itemize}
+      \item Pseudokod
+      \item Referenser
+      \item Cellulära automater
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Pseudokod}
+
+    Implementera algoritmen ``cocktail sort'' enligt pseudokoden i
+    förberedelsematerialet på hemsidan.
+
+    \texttt{https://seminarium.sörnäs.se}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Referenser}
+
+    \begin{columns}
+      \begin{column}{0.48\textwidth}
+        \begin{lstlisting}
+def add_two1(n):
+    n + 2
+
+def add_two2(n):
+    n += 2
+
+>>> a = 1
+>>> add_two1(a)
+>>> a
+?  # 1
+>>> add_two2(a)
+>>> a
+?  # 2
+        \end{lstlisting}
+      \end{column}
+      \begin{column}{0.48\textwidth}
+        \begin{lstlisting}    
+def add_two3(lst):
+    lst += [2]
+
+def add_two4(lst):
+    lst.append(2)
+
+>>> b = [0, 1]
+>>> add_two3(b)
+>>> b
+?  # 3
+>>> add_two4(b)
+>>> b
+?  # 4
+        \end{lstlisting}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Referenser}
+
+    \begin{lstlisting}
+>>> a = []
+>>> a.append(a)
+>>> a
+    \end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}{Cellulära automater}
+
+    Vi har en en-dimensionell lista med ``celler'' som antingen lever eller är
+    döda. För varje tidssteg kollar vi på cellen och dess två grannar för att se
+    om den ska leva eller dö.
+
+    \pause{}
+
+    Exempel: En cell lever om och endast om dess vänstra granne levde förra
+    tidssteget.
+
+    \pause{}
+
+    \small
+    \texttt{00010000} \\
+    \texttt{00001000} \\
+    \texttt{00000100} \\
+    \texttt{00000010}
+
+    \pause{}
+
+    \texttt{def rule(left, current, right):}\\\pause{}
+    \hspace{4em}\texttt{return left}
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Cellulära automater}
+
+    Kopiera kodbasen från förberedelsematerialet och
+    implementera \texttt{next\_state}.
+
+    Fundera över vad som händer vid kanterna.
+
+  \end{frame}
+
+  \begin{frame}[fragile]{Cellulära automater}
+
+    Skriv en predikatsfunktion som implementerar nedanstående sanningstabell.
+    Vad för mönster bildas?
+
+    \begin{tabular}{|c c c||c|}
+      \hline
+      left & current & right & next \\\hline
+      0 & 0 & 0 & 0 \\
+      0 & 0 & 1 & 1 \\
+      0 & 1 & 0 & 1 \\
+      0 & 1 & 1 & 1 \\\hline
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 1 & 1 \\
+      1 & 1 & 0 & 1 \\
+      1 & 1 & 1 & 0 \\\hline
+    \end{tabular}
+
+  \end{frame}
+
+  \begin{frame}{Cellulära automater i 2 dimensioner}
+
+    Känt exempel: Conway's Game of Life.
+
+    En cell
+
+    \begin{enumerate}
+      \item föds (död $\rightarrow$ levande) om den har 3 grannar vid liv
+      \item överlever (levande $\rightarrow$ levande) om den har 2 eller 3 grannar vid liv
+      \item dör eller fortsätter vara död annars.
+    \end{enumerate}
+
+  \end{frame}
+
+\end{document}
