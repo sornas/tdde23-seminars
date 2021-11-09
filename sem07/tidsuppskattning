@@ -1,15 +1,16 @@
-00:15: introduktion
-00:15: EBNF
-00:20:   uppgift 1
-00:25:   diskussion 1
-00:30:   uppgift 2
-00:40:   diskussion 2
-00:45: identifiera ord
-00:55:   diskussion
-01:00: paus
-01:15: prefix
-01:25:   diskussion
-01:30: primtal i fibonacci (skippa om ont om tid)
-01:40:   diskussion
-01:45: relativ sökväg
-01:55:   diskussion
+00:15 (00:15): introduktion
+00:15 (00:16): EBNF
+00:20 (00:20):   uppgift 1
+00:25 (00:26):   diskussion 1
+00:30 (00:31):   uppgift 2
+00:40 (00:50):   diskussion 2
+<<här var det fel i planeringen>>
+01:00 (01:03): paus
+01:15 (01:15): prefix
+01:25 (01:27):   diskussion
+<<hade behövt 15 minuter till uppgiften>>
+01:30 (01:32): primtal i fibonacci
+01:40 (01:45):   diskussion
+01:45 (): relativ sökväg
+01:55 ():   diskussion
+02:00 (01:55): slut
